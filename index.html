@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>evehole</title>
+		<link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/evehole.css" type="text/css">
+	</head>
+	<body>
+		<div id="evehole">
+			<sig-dump></sig-dump>
+			<sig-list :sigs="sigs"></sig-list>
+
+			<script type="text/template" id="sig-dump-template">
+				<form>
+					<textarea name="dump" value="" placeholder="Copy & Paste Probe Scanner Results Here..." v-model="dump"></textarea>
+				</form>
+			</script>
+
+			<script type="text/template" id="sig-item-template">
+				<tr :data-dist="sig.dist" :data-percent="sig.percent">
+					<td><input type="text" name="label" value="" placeholder="Unknown" v-model="sig.label"></span></td>
+					<td><input type="text" name="id" value="" placeholder="ABC-123" v-model="sig.id"></td>
+					<td>
+						<span class="select-wrap">
+							<select name="site" v-model="sig.site">
+								<option value="Wormhole">Wormhole</option>
+								<option value="Data Site">Data Site</option>
+								<option value="Relic Site">Relic Site</option>
+								<option value="Combat Site">Combat Site</option>
+								<option value="Ore Site">Ore Site</option>
+								<option value="Gas Site">Gas Site</option>
+							</select>
+						</span>
+						<span class="select-wrap" v-if="isWormhole">
+							<select name="class" v-model="sig.type" >
+								<option value=""></option>
+								<option value="C1">C1</option>
+								<option value="C2">C2</option>
+								<option value="C3">C3</option>
+								<option value="C4">C4</option>
+								<option value="C5">C5</option>
+								<option value="C6">C6</option>
+								<option value="C13">C13</option>
+								<option value="K162">K162</option>
+								<option value="Highsec">Highsec</option>
+								<option value="Lowsec">Lowsec</option>
+								<option value="Null">Null</option>
+								<option value="Thera">Thera</option>
+								<option value="Barbican">Barbican</option>
+								<option value="Redoubt">Redoubt</option>
+								<option value="Sentinel">Sentinel</option>
+								<option value="Conflux">Conflux</option>
+							</select>
+						</span>
+						<span class="select-wrap" v-if="isWormhole">
+							<select name="types" v-model="sig.tag">
+								<option value=""></option>
+								<option value="K162">K162</option>
+								<option value="A009">A009</option>
+								<option value="A239">A239</option>
+								<option value="A641">A641</option>
+								<option value="A982">A982</option>
+								<option value="B041">B041</option>
+								<option value="B274">B274</option>
+								<option value="B449">B449</option>
+								<option value="B520">B520</option>
+								<option value="B735">B735</option>
+								<option value="C008">C008</option>
+								<option value="C125">C125</option>
+								<option value="C140">C140</option>
+								<option value="C247">C247</option>
+								<option value="C248">C248</option>
+								<option value="C391">C391</option>
+								<option value="C414">C414</option>
+								<option value="D364">D364</option>
+								<option value="D382">D382</option>
+								<option value="D792">D792</option>
+								<option value="D845">D845</option>
+								<option value="E004">E004</option>
+								<option value="E175">E175</option>
+								<option value="E545">E545</option>
+								<option value="E587">E587</option>
+								<option value="F135">F135</option>
+								<option value="F355">F355</option>
+								<option value="G008">G008</option>
+								<option value="G024">G024</option>
+								<option value="H121">H121</option>
+								<option value="H296">H296</option>
+								<option value="H900">H900</option>
+								<option value="I182">I182</option>
+								<option value="J244">J244</option>
+								<option value="K329">K329</option>
+								<option value="K346">K346</option>
+								<option value="L005">L005</option>
+								<option value="L031">L031</option>
+								<option value="L477">L477</option>
+								<option value="L614">L614</option>
+								<option value="M001">M001</option>
+								<option value="M164">M164</option>
+								<option value="M267">M267</option>
+								<option value="M555">M555</option>
+								<option value="M609">M609</option>
+								<option value="N062">N062</option>
+								<option value="N110">N110</option>
+								<option value="N290">N290</option>
+								<option value="N432">N432</option>
+								<option value="N766">N766</option>
+								<option value="N770">N770</option>
+								<option value="N944">N944</option>
+								<option value="N968">N968</option>
+								<option value="O128">O128</option>
+								<option value="O477">O477</option>
+								<option value="O883">O883</option>
+								<option value="P060">P060</option>
+								<option value="Q003">Q003</option>
+								<option value="Q063">Q063</option>
+								<option value="Q317">Q317</option>
+								<option value="R051">R051</option>
+								<option value="R259">R259</option>
+								<option value="R474">R474</option>
+								<option value="R943">R943</option>
+								<option value="S047">S047</option>
+								<option value="S199">S199</option>
+								<option value="S804">S804</option>
+								<option value="S877">S877</option>
+								<option value="T405">T405</option>
+								<option value="T458">T458</option>
+								<option value="U210">U210</option>
+								<option value="U319">U319</option>
+								<option value="U574">U574</option>
+								<option value="V283">V283</option>
+								<option value="V753">V753</option>
+								<option value="V301">V301</option>
+								<option value="V898">V898</option>
+								<option value="V911">V911</option>
+								<option value="V928">V928</option>
+								<option value="W237">W237</option>
+								<option value="X702">X702</option>
+								<option value="X877">X877</option>
+								<option value="Y790">Y790</option>
+								<option value="Y683">Y683</option>
+								<option value="Z006">Z006</option>
+								<option value="Z060">Z060</option>
+								<option value="Z142">Z142</option>
+								<option value="Z457">Z457</option>
+								<option value="Z647">Z647</option>
+								<option value="Z971">Z971</option>
+							</select>
+						<span class="select-wrap">
+						<span v-if="lifetime && isWormhole" v-text="lifetimeString"></span>
+					</td>
+					<td>
+						<span class="select-wrap">
+							<select name="parent" v-model="sig.parent">
+								<option value="home">Home</option>
+							</select>
+						</span>
+					</td>
+					<td>
+						<input type="checkbox" name="bm" id="bm">
+					</td>
+					<td>
+						<input type="checkbox" name="eol">
+					</td>
+					<td>
+						<input type="checkbox" name="crit">
+					</td>
+					<td>
+						<button class="remove-sig" @click="sigRemove">X</button>
+					</td>
+				</tr>
+			</script>
+
+			<script type="text/template" id="sig-list-template">
+				<div>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Label</th>
+								<th>ID</th>
+								<th>Type/Class</th>
+								<th>Parent</th>
+								<th>BM?</th>
+								<th>EOL?</th>
+								<th>Crit?</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="sig-list">
+							<sig-item v-for="sig in sigs" :key="sig.id" :sig="sig"></sig-item>
+						</tbody>
+					</table>
+				</div>
+			</script>
+		</div>
+
+		<script src="assets/js/vendor/vue.min.js" type="text/javascript"></script>
+		<script src="assets/js/evehole.js" type="text/javascript"></script>
+	</body>
+</html>
