@@ -22,7 +22,7 @@
 				<tr :data-dist="sig.dist" :data-percent="sig.percent">
 					<td><input type="text" name="label" value="" placeholder="Unknown" v-model="sig.label"></span></td>
 					<td><input type="text" name="id" value="" placeholder="ABC-123" v-model="sig.id"></td>
-					<td>
+					<td class="inlines">
 						<span class="select-wrap">
 							<select name="site" v-model="sig.site">
 								<option value="Wormhole">Wormhole</option>
@@ -148,7 +148,7 @@
 								<option value="Z647">Z647</option>
 								<option value="Z971">Z971</option>
 							</select>
-						<span class="select-wrap">
+						</span>
 						<span v-if="lifetime && isWormhole" v-text="lifetimeString"></span>
 					</td>
 					<td>

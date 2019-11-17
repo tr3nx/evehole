@@ -10,7 +10,7 @@ textarea {
 	height: 250px;
 	padding: 25px;
 	border: 0;
-	font-size: 12px;
+	font-size: 16px;
 }
 
 input,
@@ -38,11 +38,14 @@ select {
 	-moz-appearance: none;
 }
 
-.select-wrap { position: relative; }
+.select-wrap {
+	display: inline-block;
+	position: relative;
+}
 	.select-wrap::after {
 		display: inline-block;
 		position: absolute;
-		top: 0;
+		top: 10px;
 		right: 10px;
 		content: 'v';
 		font-size: 13px;
@@ -62,9 +65,7 @@ select {
 	color: #252525;
 	transition: background-color 0.5s ease;
 }
-	.remove-sig:hover {
-		background-color: rgba(0, 0, 0, 0.1);
-	}
+	.remove-sig:hover { background-color: rgba(0, 0, 0, 0.1); }
 
 .table thead th {
 	border-color: rgba(0, 0, 0, 0.3);
